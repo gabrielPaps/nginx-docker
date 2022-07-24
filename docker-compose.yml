@@ -1,0 +1,21 @@
+version: '3.5'
+networks:
+  net-docker-express:
+    external: true
+    name: net-docker-express
+services:
+  d-e_web:
+    build: .
+    ports:
+      - "3000:3000"
+  d-e_main:
+    build:
+      context: ./
+    container_name: d-e_main
+    # hostname: main
+    # domainname: main
+    restart: unless-stopped
+    env_file: ./config.env
+    networks:
+      - net-docker-express
+
